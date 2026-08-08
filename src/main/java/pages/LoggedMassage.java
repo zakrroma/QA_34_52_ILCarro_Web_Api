@@ -1,4 +1,24 @@
 package pages;
 
-public class LoggedMassage {
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+
+public class LoggedMassage
+{
+    public LoggedMassage(WebDriver driver)
+    {
+        PageFactory.initElements(new AjaxElementLocatorFactory
+                (driver, 10), this);
+    }
+
+    @FindBy(xpath = "//app-error//button")
+    WebElement btnOK;
+
+    public void clickBtnOK()
+    {
+        btnOK.click();
+    }
 }
