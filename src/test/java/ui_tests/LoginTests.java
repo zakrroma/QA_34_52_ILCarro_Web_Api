@@ -5,7 +5,7 @@ import manager.AppManager;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.LoggedMassage;
+import pages.LoggedMessage;
 import pages.LoginPage;
 
 public class LoginTests extends AppManager
@@ -34,7 +34,7 @@ public class LoginTests extends AppManager
 
         loginPage.pause(2000);
         //==========================================
-        new LoggedMassage(getDriver()).clickBtnOK();
+        new LoggedMessage(getDriver()).clickBtnOK();
 
         HomePage homePage = new HomePage(getDriver());
 

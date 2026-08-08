@@ -6,9 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class LoggedMassage
+public class LoggedMessage
 {
-    public LoggedMassage(WebDriver driver)
+    public LoggedMessage(WebDriver driver)
     {
         PageFactory.initElements(new AjaxElementLocatorFactory
                 (driver, 10), this);
