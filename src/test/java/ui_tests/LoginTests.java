@@ -8,17 +8,14 @@ import pages.HomePage;
 import pages.LoggedMessage;
 import pages.LoginPage;
 
-public class LoginTests extends AppManager
-{
+public class LoginTests extends AppManager {
     @BeforeMethod
-    public void goToRegistrationLoginPage()
-    {
+    public void goToRegistrationLoginPage() {
         new HomePage(getDriver()).clickNavLinkLogin();
     }
 
     @Test
-    public void loginPositiveTest()
-    {
+    public void loginPositiveTest() {
         UserData user = UserData.builder()
                 .username("kek@qwer.ty")
                 .password("Kek1234!")

@@ -6,10 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class LoggedMessage
-{
-    public LoggedMessage(WebDriver driver)
-    {
+public class LoggedMessage {
+    public LoggedMessage(WebDriver driver) {
         PageFactory.initElements(new AjaxElementLocatorFactory
                 (driver, 10), this);
     }
@@ -17,8 +15,7 @@ public class LoggedMessage
     @FindBy(xpath = "//app-error//button")
     WebElement btnOK;
 
-    public void clickBtnOK()
-    {
+    public void clickBtnOK() {
         btnOK.click();
     }
 }

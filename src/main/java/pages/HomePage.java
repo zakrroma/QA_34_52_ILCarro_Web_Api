@@ -6,10 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class HomePage extends BasePage
-{
-    public HomePage(WebDriver driver)
-    {
+public class HomePage extends BasePage {
+    public HomePage(WebDriver driver) {
         setDriver(driver);
         driver.get("https://ilcarro.web.app/");
         PageFactory.initElements(new AjaxElementLocatorFactory
@@ -34,33 +32,27 @@ public class HomePage extends BasePage
     @FindBy(xpath = "//div[@class='header']/a[text()=' Logout ']")
     WebElement navLinkLogout;
 
-    public void clickNavLinkLogin()
-    {
+    public void clickNavLinkLogin() {
         navLinkLogin.click();
     }
 
-    public void clickNavLinkSignUp()
-    {
+    public void clickNavLinkSignUp() {
         navLinkSignUp.click();
     }
 
-    public void clickNavLinkTerms()
-    {
+    public void clickNavLinkTerms() {
         navLinkTerms.click();
     }
 
-    public void clickNavLinkLet()
-    {
+    public void clickNavLinkLet() {
         navLinkLet.click();
     }
 
-    public void clickNavLinkSearch()
-    {
+    public void clickNavLinkSearch() {
         navLinkSearch.click();
     }
 
-    public void clickNavLinkLogout()
-    {
+    public void clickNavLinkLogout() {
         navLinkLogout.click();
     }
 }
