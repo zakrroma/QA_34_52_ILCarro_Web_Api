@@ -14,22 +14,22 @@ public class HomePage extends BasePage {
                 (driver, 10), this);
     }
 
-    @FindBy(xpath = "//div[@class='header']/a[text()=' Log in ']")
+    @FindBy(xpath = "//a[text()=' Log in ']")
     WebElement navLinkLogin;
 
-    @FindBy(xpath = "//div[@class='header']/a[text()=' Sign up ']")
+    @FindBy(xpath = "//a[text()=' Sign up ']")
     WebElement navLinkSignUp;
 
-    @FindBy(xpath = "//div[@class='header']/a[text()=' Terms of use ']")
+    @FindBy(xpath = "//a[text()=' Terms of use ']")
     WebElement navLinkTerms;
 
-    @FindBy(xpath = "//div[@class='header']/a[text()=' Let the car work ']")
+    @FindBy(xpath = "//a[text()=' Let the car work ']")
     WebElement navLinkLet;
 
-    @FindBy(xpath = "//div[@class='header']/a[text()=' Search ']")
+    @FindBy(xpath = "//a[text()=' Search ']")
     WebElement navLinkSearch;
 
-    @FindBy(xpath = "//div[@class='header']/a[text()=' Logout ']")
+    @FindBy(xpath = "//a[text()=' Logout ']")
     WebElement navLinkLogout;
 
     public void clickNavLinkLogin() {

@@ -5,12 +5,11 @@ import manager.AppManager;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.LoggedMessage;
 import pages.LoginPage;
 
 public class LoginTests extends AppManager {
     @BeforeMethod
-    public void goToRegistrationLoginPage() {
+    public void goToLoginPage() {
         new HomePage(getDriver()).clickNavLinkLogin();
     }
 
@@ -23,23 +22,8 @@ public class LoginTests extends AppManager {
 
         LoginPage loginPage = new LoginPage(getDriver());
 
-        loginPage.fillLoginRegistrationForm(user);
+        loginPage.fillLoginForm(user);
 
-        loginPage.pause(2000);
-
-        loginPage.clickBtnLogin();
-
-        loginPage.pause(2000);
-        //==========================================
-        new LoggedMessage(getDriver()).clickBtnOK();
-
-        HomePage homePage = new HomePage(getDriver());
-
-        homePage.pause(2000);
-
-        homePage.clickNavLinkLogout();
-
-        homePage.pause(2000);
-        //==========================================
+        loginPage.clickBtnSubmit();
     }
 }

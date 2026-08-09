@@ -22,12 +22,12 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//form/button")
     WebElement btnSubmit;
 
-    public void fillLoginRegistrationForm(UserData user) {
+    public void fillLoginForm(UserData user) {
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
     }
 
-    public void clickBtnLogin() {
+    public void clickBtnSubmit() {
         btnSubmit.click();
     }
 }
