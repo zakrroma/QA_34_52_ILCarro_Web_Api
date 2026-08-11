@@ -22,6 +22,12 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//form/button")
     WebElement btnSubmit;
 
+    @FindBy(xpath = "//h2[@class='message']")
+    WebElement messageLoginFailed;
+
+    @FindBy(xpath = "//button[text()='Ok']")
+    WebElement btnOk;
+
     public void fillLoginForm(UserData user) {
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
@@ -29,5 +35,13 @@ public class LoginPage extends BasePage {
 
     public void clickBtnSubmit() {
         btnSubmit.click();
+    }
+
+    public void clickBtnOk() {
+        btnOk.click();
+    }
+
+    public boolean validateTextInMessageLoginFailed(String text) {
+        return isTextInElementPresent(messageLoginFailed, text);
     }
 }
