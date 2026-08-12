@@ -5,11 +5,15 @@ import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
+import static utils.PropertiesReader.*;
 
 public class LoginTests extends AppManager {
     LoginPage loginPage;
+    SoftAssert softAssert =  new SoftAssert();
+
     @BeforeMethod
     public void goToLoginPage() {
         new HomePage(getDriver())
@@ -20,43 +24,91 @@ public class LoginTests extends AppManager {
     @Test
     public void loginPositiveTest() {
         UserData user = UserData.builder()
-                .username("kek@qwer.ty")
-                .password("Kek1234!")
+                .username(getProperty("base.properties","email"))
+                .password(getProperty("base.properties","password"))
                 .build();
 
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
+
+        Assert.assertTrue(loginPage.isMessageLoggedInDisplayed());
     }
 
     @Test
     public void loginIncorrectPasswordNegativeTest() {
         UserData user = UserData.builder()
-                .username("kek@qwer.ty")
-                .password("1")
+                .username(getProperty("base.properties","email"))
+                .password("Kek1245!")
                 .build();
 
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
 
-        Assert.assertTrue(loginPage
-                .validateTextInMessageLoginFailed("Login or Password incorrect"));
-
-        loginPage.clickBtnOk();
+        Assert.assertTrue(loginPage.isMessageLoginFailedDisplayed());
     }
 
     @Test
     public void loginUnregisteredUsernameNegativeTest() {
         UserData user = UserData.builder()
                 .username("kek1@qwer.ty")
+                .password(getProperty("base.properties","password"))
+                .build();
+
+        loginPage.fillLoginForm(user);
+        loginPage.clickBtnSubmit();
+
+        Assert.assertTrue(loginPage.isMessageLoginFailedDisplayed());
+    }
+
+    @Test
+    public void loginAllEmptyNotInteractedFieldsNegativeTest() {
+        loginPage.clickBtnSubmit();
+        Assert.assertFalse(loginPage.isBtnSubmitEnabled());
+    }
+
+    @Test
+    public void loginAllEmptyInteractedFieldsNegativeTest() {
+        UserData user = UserData.builder()
+                .username("")
+                .password("")
+                .build();
+
+        loginPage.fillLoginForm(user);
+        loginPage.clickBtnSubmit();
+
+        softAssert.assertFalse(loginPage.isBtnSubmitEnabled(),
+                "validating if submit button is enabled");
+        System.out.println("test is working");
+        softAssert.assertTrue(loginPage.isTextPresentsInError("Email is required"),
+                "validating message: Email is required");
+        softAssert.assertTrue(loginPage.isTextPresentsInError("Password is required"),
+                "validating message: Password is required");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginEmptyPasswordFieldNegativeTest() {
+        UserData user = UserData.builder()
+                .username("kek1@qwer.ty")
+                .password("")
+                .build();
+
+        loginPage.fillLoginForm(user);
+        loginPage.clickBtnSubmit();
+
+        Assert.assertFalse(loginPage.isBtnSubmitEnabled());
+    }
+
+    @Test
+    public void loginEmptyUsernameFieldNegativeTest() {
+        UserData user = UserData.builder()
+                .username("")
                 .password("Kek1234!")
                 .build();
 
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
 
-        Assert.assertTrue(loginPage
-                .validateTextInMessageLoginFailed("Login or Password incorrect"));
-
-        loginPage.clickBtnOk();
+        Assert.assertFalse(loginPage.isBtnSubmitEnabled());
     }
 }

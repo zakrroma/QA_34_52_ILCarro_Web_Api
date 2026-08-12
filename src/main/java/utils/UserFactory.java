@@ -9,7 +9,9 @@ public class UserFactory {
     public static UserData positiveUser(){
         UserData user = UserData.builder()
                 .username(faker.internet().emailAddress())
-                .password("Qwer1234!")
+                .password("Pass1234!")
+                .firstName(faker.name().firstName())
+                .lastName(faker.name().lastName())
                 .build();
         return user;
     }

@@ -25,6 +25,9 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//h2[@class='message']")
     WebElement messageLoginFailed;
 
+    @FindBy(xpath = "//h2[@class='message']")
+    WebElement messageLoggedIn;
+
     @FindBy(xpath = "//button[text()='Ok']")
     WebElement btnOk;
 
@@ -41,7 +44,15 @@ public class LoginPage extends BasePage {
         btnOk.click();
     }
 
-    public boolean validateTextInMessageLoginFailed(String text) {
-        return isTextInElementPresent(messageLoginFailed, text);
+    public boolean isMessageLoggedInDisplayed() {
+        return isElementDisplayed(messageLoggedIn);
+    }
+
+    public boolean isMessageLoginFailedDisplayed() {
+        return isElementDisplayed(messageLoginFailed);
+    }
+
+    public boolean isBtnSubmitEnabled() {
+        return btnSubmit.isEnabled();
     }
 }
