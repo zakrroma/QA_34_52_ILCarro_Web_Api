@@ -6,7 +6,7 @@ import net.datafaker.Faker;
 public class UserFactory {
     static Faker faker = new Faker();
 
-    public static UserData positiveUser(){
+    public static UserData positiveUser() {
         UserData user = UserData.builder()
                 .username(faker.internet().emailAddress())
                 .password("Pass1234!")

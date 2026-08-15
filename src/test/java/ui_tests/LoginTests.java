@@ -8,11 +8,12 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
+
 import static utils.PropertiesReader.*;
 
 public class LoginTests extends AppManager {
     LoginPage loginPage;
-    SoftAssert softAssert =  new SoftAssert();
+    SoftAssert softAssert = new SoftAssert();
 
     @BeforeMethod
     public void goToLoginPage() {
@@ -24,8 +25,8 @@ public class LoginTests extends AppManager {
     @Test
     public void loginPositiveTest() {
         UserData user = UserData.builder()
-                .username(getProperty("base.properties","email"))
-                .password(getProperty("base.properties","password"))
+                .username(getProperty("base.properties", "email"))
+                .password(getProperty("base.properties", "password"))
                 .build();
 
         loginPage.fillLoginForm(user);
@@ -37,7 +38,7 @@ public class LoginTests extends AppManager {
     @Test
     public void loginIncorrectPasswordNegativeTest() {
         UserData user = UserData.builder()
-                .username(getProperty("base.properties","email"))
+                .username(getProperty("base.properties", "email"))
                 .password("Kek1245!")
                 .build();
 
@@ -48,10 +49,10 @@ public class LoginTests extends AppManager {
     }
 
     @Test
-    public void loginUnregisteredUsernameNegativeTest() {
+    public void loginIncorrectUsernameNegativeTest() {
         UserData user = UserData.builder()
                 .username("kek1@qwer.ty")
-                .password(getProperty("base.properties","password"))
+                .password(getProperty("base.properties", "password"))
                 .build();
 
         loginPage.fillLoginForm(user);
@@ -78,7 +79,6 @@ public class LoginTests extends AppManager {
 
         softAssert.assertFalse(loginPage.isBtnSubmitEnabled(),
                 "validating if submit button is enabled");
-        System.out.println("test is working");
         softAssert.assertTrue(loginPage.isTextPresentsInError("Email is required"),
                 "validating message: Email is required");
         softAssert.assertTrue(loginPage.isTextPresentsInError("Password is required"),
