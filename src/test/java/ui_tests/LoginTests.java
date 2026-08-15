@@ -89,7 +89,7 @@ public class LoginTests extends AppManager {
     @Test
     public void loginEmptyPasswordFieldNegativeTest() {
         UserData user = UserData.builder()
-                .username("kek1@qwer.ty")
+                .username(getProperty("base.properties", "email"))
                 .password("")
                 .build();
 
@@ -103,7 +103,7 @@ public class LoginTests extends AppManager {
     public void loginEmptyUsernameFieldNegativeTest() {
         UserData user = UserData.builder()
                 .username("")
-                .password("Kek1234!")
+                .password(getProperty("base.properties", "password"))
                 .build();
 
         loginPage.fillLoginForm(user);
