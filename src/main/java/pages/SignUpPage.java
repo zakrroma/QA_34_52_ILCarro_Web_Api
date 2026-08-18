@@ -1,0 +1,55 @@
+package pages;
+
+import dto.UserData;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+
+public class SignUpPage extends BasePage {
+    public SignUpPage(WebDriver driver) {
+        PageFactory.initElements(new AjaxElementLocatorFactory
+                (driver, 10), this);
+    }
+
+    @FindBy(xpath = "//form/div[1]/input")
+    WebElement inputName;
+
+    @FindBy(xpath = "//form/div[2]/input")
+    WebElement inputLastName;
+
+    @FindBy(xpath = "//form/div[3]/input")
+    WebElement inputEmail;
+
+    @FindBy(xpath = "//form/div[4]/input")
+    WebElement inputPassword;
+
+    @FindBy(xpath = "//form//button")
+    WebElement btnSubmit;
+
+    @FindBy()
+    WebElement checkboxAgreement;
+
+    @FindBy(xpath = "//h2[@class='message']")
+    WebElement messageRegistered;
+
+    public void fillRegistrationForm(UserData user) {
+        inputName.sendKeys(user.getFirstName());
+        inputLastName.sendKeys(user.getLastName());
+        inputEmail.sendKeys(user.getUsername());
+        inputPassword.sendKeys(user.getPassword());
+    }
+
+    public void setCheckboxAgreement() {
+        checkboxAgreement.click();
+    }
+
+    public void clickBtnSubmit() {
+        btnSubmit.click();
+    }
+
+    public boolean isMessageRegisteredDisplayed() {
+        return isElementDisplayed(messageRegistered);
+    }
+}
