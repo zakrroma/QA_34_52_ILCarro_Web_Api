@@ -16,23 +16,26 @@ public class HomePage extends BasePage {
                 (driver, 10), this);
     }
 
-    @FindBy(xpath = "//a[text()=' Log in ']")
+    @FindBy(xpath = "//div[@class='header']/a[6]")
     WebElement navLinkLogin;
 
-    @FindBy(xpath = "//a[text()=' Sign up ']")
+    @FindBy(xpath = "//div[@class='header']/a[5]")
     WebElement navLinkSignUp;
 
-    @FindBy(xpath = "//a[text()=' Terms of use ']")
+    @FindBy(xpath = "//div[@class='header']/a[4]")
     WebElement navLinkTerms;
 
-    @FindBy(xpath = "//a[text()=' Let the car work ']")
+    @FindBy(xpath = "//div[@class='header']/a[3]")
     WebElement navLinkLet;
 
-    @FindBy(xpath = "//a[text()=' Search ']")
+    @FindBy(xpath = "//div[@class='header']/a[2]")
     WebElement navLinkSearch;
 
-    @FindBy(xpath = "//a[text()=' Logout ']")
+    @FindBy(xpath = "//div[@class='header']/a[5]")
     WebElement navLinkLogout;
+
+    @FindBy(xpath = "//div[@class='header']/a[6]")
+    WebElement navLinkDeleteAccount;
 
     public void clickNavLinkLogin() {
         navLinkLogin.click();
@@ -56,5 +59,9 @@ public class HomePage extends BasePage {
 
     public void clickNavLinkLogout() {
         navLinkLogout.click();
+    }
+
+    public void clickNavLinkDeleteAccount() {
+        navLinkDeleteAccount.click();
     }
 }

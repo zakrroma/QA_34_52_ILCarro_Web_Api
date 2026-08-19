@@ -7,15 +7,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
+import pages.PopUpMessage;
 import pages.SignUpPage;
-import utils.UserFactory;
+
+import static utils.UserFactory.*;
 
 public class RegistrationTests extends AppManager {
     SignUpPage signUpPage;
     SoftAssert softAssert = new SoftAssert();
 
     @BeforeMethod
-    public void goToLoginPage() {
+    public void goToSignUpPage() {
         new HomePage(getDriver())
                 .clickNavLinkSignUp();
         signUpPage = new SignUpPage(getDriver());
@@ -23,12 +25,13 @@ public class RegistrationTests extends AppManager {
 
     @Test
     public void registrationPositiveTest() {
-        UserData user = UserFactory.positiveUser();
+        UserData user = positiveUser();
 
         signUpPage.fillRegistrationForm(user);
-        //signUpPage.setCheckboxAgreement();
-        //signUpPage.clickBtnSubmit();
+        signUpPage.setCheckboxAgreement();
+        signUpPage.clickBtnSubmit();
 
-        //Assert.assertTrue(signUpPage.isMessageRegisteredDisplayed());
+        Assert.assertTrue(new PopUpMessage(getDriver())
+                .isTextInMessage("You are logged in success"));
     }
 }

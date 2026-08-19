@@ -16,7 +16,7 @@ public class UserDataProvider {
         List<UserData> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(
                 new FileReader("src/test/resources/" +
-                        "wrong_data.csv"))) {
+                        "wrong_reg_data.csv"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] row = line.split(",");

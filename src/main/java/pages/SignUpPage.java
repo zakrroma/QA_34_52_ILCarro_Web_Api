@@ -1,6 +1,7 @@
 package pages;
 
 import dto.UserData;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,7 +15,7 @@ public class SignUpPage extends BasePage {
     }
 
     @FindBy(xpath = "//form/div[1]/input")
-    WebElement inputName;
+    WebElement inputFirstName;
 
     @FindBy(xpath = "//form/div[2]/input")
     WebElement inputLastName;
@@ -28,28 +29,30 @@ public class SignUpPage extends BasePage {
     @FindBy(xpath = "//form//button")
     WebElement btnSubmit;
 
-    @FindBy()
+    @FindBy(xpath = "//input[@id='terms-of-use']")
     WebElement checkboxAgreement;
 
-    @FindBy(xpath = "//h2[@class='message']")
-    WebElement messageRegistered;
+    @FindBy(xpath = "//button[text()='Ok']")
+    WebElement btnOk;
 
     public void fillRegistrationForm(UserData user) {
-        inputName.sendKeys(user.getFirstName());
+        inputFirstName.sendKeys(user.getFirstName());
         inputLastName.sendKeys(user.getLastName());
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
     }
 
     public void setCheckboxAgreement() {
-        checkboxAgreement.click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", checkboxAgreement);
+//        js.executeScript("arguments[0].checked = true;", checkboxAgreement);
     }
 
     public void clickBtnSubmit() {
         btnSubmit.click();
     }
 
-    public boolean isMessageRegisteredDisplayed() {
-        return isElementDisplayed(messageRegistered);
+    public void clickBtnOk() {
+        btnOk.click();
     }
 }
