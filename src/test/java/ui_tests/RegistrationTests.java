@@ -14,10 +14,10 @@ import static utils.UserFactory.*;
 
 public class RegistrationTests extends AppManager {
     SignUpPage signUpPage;
-    SoftAssert softAssert = new SoftAssert();
 
     @BeforeMethod
     public void goToSignUpPage() {
+        logger.info("Starting registration test");
         new HomePage(getDriver())
                 .clickNavLinkSignUp();
         signUpPage = new SignUpPage(getDriver());
@@ -28,10 +28,22 @@ public class RegistrationTests extends AppManager {
         UserData user = positiveUser();
 
         signUpPage.fillRegistrationForm(user);
-        signUpPage.setCheckboxAgreement();
+        signUpPage.setCheckboxAgreement(); //using JavaScript
         signUpPage.clickBtnSubmit();
 
         Assert.assertTrue(new PopUpMessage(getDriver())
                 .isTextInMessage("You are logged in success"));
+    }
+
+    @Test
+    public void registrationPositiveTest2() {
+        UserData user = positiveUser();
+
+        signUpPage.fillRegistrationForm(user);
+        signUpPage.setCheckboxAgreementWithActions();
+        signUpPage.clickBtnSubmit();
+
+//        Assert.assertTrue(new PopUpMessage(getDriver())
+//                .isTextInMessage("You are logged in success"));
     }
 }

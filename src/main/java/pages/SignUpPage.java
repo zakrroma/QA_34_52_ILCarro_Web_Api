@@ -4,6 +4,7 @@ import dto.UserData;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -35,6 +36,9 @@ public class SignUpPage extends BasePage {
     @FindBy(xpath = "//button[text()='Ok']")
     WebElement btnOk;
 
+    @FindBy(xpath = "//label[@for='terms-of-use']")
+    WebElement checkboxAgreementArea;
+
     public void fillRegistrationForm(UserData user) {
         inputFirstName.sendKeys(user.getFirstName());
         inputLastName.sendKeys(user.getLastName());
@@ -46,6 +50,15 @@ public class SignUpPage extends BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", checkboxAgreement);
 //        js.executeScript("arguments[0].checked = true;", checkboxAgreement);
+    }
+
+    public void setCheckboxAgreementWithActions() {
+        int x = checkboxAgreementArea.getSize().getWidth();
+        int y = checkboxAgreementArea.getSize().getHeight();
+        System.out.println("x: " + x + " y: " + y);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(checkboxAgreement,-x*3/10,-y/2)
+                .click().perform();
     }
 
     public void clickBtnSubmit() {
