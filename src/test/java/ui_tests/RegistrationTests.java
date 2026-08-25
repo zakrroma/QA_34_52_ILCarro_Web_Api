@@ -5,7 +5,6 @@ import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.PopUpMessage;
 import pages.SignUpPage;
