@@ -29,7 +29,7 @@ public class CarAddingTests extends AppManager {
 
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
-        loginPage.clickBtnOk();
+        new PopUpMessage(getDriver()).clickBtnOk();
 
         new HomePage(getDriver()).clickNavLinkLet();
     }

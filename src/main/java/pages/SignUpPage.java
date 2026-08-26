@@ -33,9 +33,6 @@ public class SignUpPage extends BasePage {
     @FindBy(xpath = "//input[@id='terms-of-use']")
     WebElement checkboxAgreement;
 
-    @FindBy(xpath = "//button[text()='Ok']")
-    WebElement btnOk;
-
     @FindBy(xpath = "//label[@for='terms-of-use']")
     WebElement checkboxAgreementArea;
 
@@ -63,9 +60,5 @@ public class SignUpPage extends BasePage {
 
     public void clickBtnSubmit() {
         btnSubmit.click();
-    }
-
-    public void clickBtnOk() {
-        btnOk.click();
     }
 }

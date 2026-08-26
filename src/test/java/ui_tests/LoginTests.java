@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.PopUpMessage;
 
 import static utils.PropertiesReader.*;
 
@@ -32,7 +33,8 @@ public class LoginTests extends AppManager {
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
 
-        Assert.assertTrue(loginPage.isMessageLoggedInDisplayed());
+        Assert.assertTrue(new PopUpMessage(getDriver())
+                .isTextInMessage("Logged in success"));
     }
 
     @Test
@@ -45,7 +47,8 @@ public class LoginTests extends AppManager {
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
 
-        Assert.assertTrue(loginPage.isMessageLoginFailedDisplayed());
+        Assert.assertTrue(new PopUpMessage(getDriver())
+                .isTextInMessage("\"Login or Password incorrect\""));
     }
 
     @Test
@@ -58,12 +61,14 @@ public class LoginTests extends AppManager {
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
 
-        Assert.assertTrue(loginPage.isMessageLoginFailedDisplayed());
+        Assert.assertTrue(new PopUpMessage(getDriver())
+                .isTextInMessage("\"Login or Password incorrect\""));
     }
 
     @Test
     public void loginAllEmptyNotInteractedFieldsNegativeTest() {
         loginPage.clickBtnSubmit();
+
         Assert.assertFalse(loginPage.isBtnSubmitEnabled());
     }
 

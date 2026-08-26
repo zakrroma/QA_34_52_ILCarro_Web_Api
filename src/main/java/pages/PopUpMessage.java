@@ -15,7 +15,14 @@ public class PopUpMessage extends BasePage {
     @FindBy(xpath = "//h2[@class='message']")
     WebElement message;
 
+    @FindBy(xpath = "//button[text()='Ok']")
+    WebElement btnOk;
+
     public boolean isTextInMessage(String text) {
         return isTextInElementPresent(message, text);
+    }
+
+    public void clickBtnOk() {
+        btnOk.click();
     }
 }
