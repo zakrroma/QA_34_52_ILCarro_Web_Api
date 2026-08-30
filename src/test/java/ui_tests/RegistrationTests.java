@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.PopUpMessage;
 import pages.SignUpPage;
+import utils.enums.NavBar;
 
 import static utils.UserFactory.*;
 
@@ -18,7 +19,7 @@ public class RegistrationTests extends AppManager {
     public void goToSignUpPage() {
         logger.info("Starting registration test");
         new HomePage(getDriver())
-                .clickNavLinkSignUp();
+                .clickNavLink(NavBar.SIGN_UP);
         signUpPage = new SignUpPage(getDriver());
     }
 
@@ -42,7 +43,7 @@ public class RegistrationTests extends AppManager {
         signUpPage.setCheckboxAgreementWithActions();
         signUpPage.clickBtnSubmit();
 
-//        Assert.assertTrue(new PopUpMessage(getDriver())
-//                .isTextInMessage("You are logged in success"));
+        Assert.assertTrue(new PopUpMessage(getDriver())
+                .isTextInMessage("You are logged in success"));
     }
 }

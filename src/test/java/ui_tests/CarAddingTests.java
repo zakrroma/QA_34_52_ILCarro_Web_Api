@@ -10,7 +10,9 @@ import pages.HomePage;
 import pages.LetTheCarWorkPage;
 import pages.LoginPage;
 import pages.PopUpMessage;
+import utils.enums.NavBar;
 
+import static utils.CarFactory.*;
 import static utils.PropertiesReader.*;
 
 public class CarAddingTests extends AppManager {
@@ -18,9 +20,9 @@ public class CarAddingTests extends AppManager {
 
     @BeforeMethod
     public void loginAndGoToLetTheCarWorkPage() {
-        new HomePage(getDriver()).clickNavLinkLogin();
-
-        LoginPage loginPage = new LoginPage(getDriver());
+        logger.info("Starting car adding test");
+        LoginPage loginPage = new HomePage(getDriver())
+                .clickNavLink(NavBar.LOGIN);
 
         UserData user = UserData.builder()
                 .username(getProperty("base.properties", "email"))
@@ -29,30 +31,38 @@ public class CarAddingTests extends AppManager {
 
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
+
         new PopUpMessage(getDriver()).clickBtnOk();
 
-        new HomePage(getDriver()).clickNavLinkLet();
+        letTheCarWorkPage = new HomePage(getDriver())
+                .clickNavLink(NavBar.LET_THE_CAR_WORK);
     }
 
     @Test
     public void carAddingPositiveTest() {
         letTheCarWorkPage = new LetTheCarWorkPage(getDriver());
 
-        CarData car = CarData.builder()
-                .location("Ashdod")
-                .manufacture("Japan")
-                .model("Toyota RAV4")
-                .year("2025")
-                .seats("5")
-                .carClass("Crossover")
-                .carRegistrationNumber("qwe12345")
-                .price("100.000 $")
-                .build();
+        CarData car = positiveCar();
 
         letTheCarWorkPage.fillLetTheCarWorkForm(car);
+        letTheCarWorkPage.downloadImage("car1.png");
         letTheCarWorkPage.clickBtnSubmit();
 
         Assert.assertTrue(new PopUpMessage(getDriver())
                 .isTextInMessage("{\"city\":\"must not be blank\"}"));
+    }
+
+    @Test
+    public void carAddingAllFieldsEmptyNotInteractedNegativeTest() {
+        letTheCarWorkPage = new LetTheCarWorkPage(getDriver());
+
+        letTheCarWorkPage.clickBtnSubmit();
+    }
+
+    @Test
+    public void carAddingAllFieldsEmptyInteractedNegativeTest() {
+        letTheCarWorkPage = new LetTheCarWorkPage(getDriver());
+
+        letTheCarWorkPage.clickBtnSubmit();
     }
 }

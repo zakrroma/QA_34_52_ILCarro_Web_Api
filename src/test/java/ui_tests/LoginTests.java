@@ -4,13 +4,19 @@ import dto.UserData;
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopUpMessage;
+import utils.RetryAnalyzer;
+import utils.TestNGListener;
+import utils.enums.NavBar;
 
 import static utils.PropertiesReader.*;
+
+@Listeners(TestNGListener.class)
 
 public class LoginTests extends AppManager {
     LoginPage loginPage;
@@ -18,8 +24,9 @@ public class LoginTests extends AppManager {
 
     @BeforeMethod
     public void goToLoginPage() {
+        logger.info("Starting login test");
         new HomePage(getDriver())
-                .clickNavLinkLogin();
+                .clickNavLink(NavBar.LOGIN);
         loginPage = new LoginPage(getDriver());
     }
 
@@ -72,7 +79,7 @@ public class LoginTests extends AppManager {
         Assert.assertFalse(loginPage.isBtnSubmitEnabled());
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void loginAllEmptyInteractedFieldsNegativeTest() {
         UserData user = UserData.builder()
                 .username("")

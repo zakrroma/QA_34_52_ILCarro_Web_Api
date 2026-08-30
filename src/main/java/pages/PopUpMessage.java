@@ -23,6 +23,6 @@ public class PopUpMessage extends BasePage {
     }
 
     public void clickBtnOk() {
-        btnOk.click();
+        clickWait(btnOk);
     }
 }

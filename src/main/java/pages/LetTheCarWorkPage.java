@@ -1,12 +1,16 @@
 package pages;
 
 import dto.CarData;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import utils.enums.Fuel;
+
+import java.io.File;
 
 public class LetTheCarWorkPage extends BasePage {
     public LetTheCarWorkPage(WebDriver driver) {
@@ -15,7 +19,7 @@ public class LetTheCarWorkPage extends BasePage {
     }
 
     @FindBy(xpath = "//form/div[1]/input")
-    WebElement inputLocation;
+    WebElement inputCity;
 
     @FindBy(xpath = "//form/div[3]/input")
     WebElement inputManufacture;
@@ -29,9 +33,6 @@ public class LetTheCarWorkPage extends BasePage {
     @FindBy(xpath = "//form/div/select")
     WebElement selectFuel;
 
-    @FindBy(xpath = "//form/div/select/option[2]")
-    WebElement optionPetrol;
-
     @FindBy(xpath = "//form/div[7]/input")
     WebElement inputSeats;
 
@@ -39,10 +40,16 @@ public class LetTheCarWorkPage extends BasePage {
     WebElement inputCarClass;
 
     @FindBy(xpath = "//form/div[9]/input")
-    WebElement inputCarRegistrationNumber;
+    WebElement inputSerialNumber;
 
     @FindBy(xpath = "//form/div[10]/input")
-    WebElement inputPrice;
+    WebElement inputPricePerDay;
+
+    @FindBy(xpath = "//form//textarea")
+    WebElement inputAbout;
+
+    @FindBy(xpath = "//label[text()='Add photos of your car']/../input")
+    WebElement addPhoto;
 
     @FindBy(css = "button[type='submit']")
     WebElement btnSubmit;
@@ -54,17 +61,30 @@ public class LetTheCarWorkPage extends BasePage {
         btnSubmit.click();
     }
 
+    public void chooseFuel(Fuel fuel) {
+        selectFuel.click();
+        driver.findElement(By.xpath(fuel.getLocator())).click();
+    }
+
+    public void downloadImage(String fileName) {
+        addPhoto.sendKeys(
+                new File("src/test/resources/"+fileName)
+                        .getAbsolutePath());
+    }
+
     public void fillLetTheCarWorkForm(CarData car) {
-        inputLocation.sendKeys(car.getLocation());
+        inputCity.sendKeys(car.getCity());
         inputManufacture.sendKeys(car.getManufacture());
         inputModel.sendKeys(car.getModel());
         inputYear.sendKeys(car.getYear());
-        selectFuel.click();
-        optionPetrol.click();
-        inputSeats.sendKeys(car.getSeats());
+        chooseFuel(car.getFuel());
+        inputSeats.sendKeys(car.getSeats().toString());
+        //inputSeats.sendKeys(car.getSeats()+"");
+        //inputSeats.sendKeys(String.valueOf(car.getSeats()));
+        //inputSeats.sendKeys(Integer.toString(car.getSeats()));
         inputCarClass.sendKeys(car.getCarClass());
-        inputCarRegistrationNumber.sendKeys(car
-                .getCarRegistrationNumber());
-        inputPrice.sendKeys(car.getPrice());
+        inputSerialNumber.sendKeys(car.getSerialNumber());
+        inputPricePerDay.sendKeys(car.getPricePerDay().toString());
+        inputAbout.sendKeys(car.getAbout());
     }
 }
