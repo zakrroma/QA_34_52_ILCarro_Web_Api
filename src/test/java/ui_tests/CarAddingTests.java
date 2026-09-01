@@ -20,7 +20,6 @@ public class CarAddingTests extends AppManager {
 
     @BeforeMethod
     public void loginAndGoToLetTheCarWorkPage() {
-        logger.info("Starting car adding test");
         LoginPage loginPage = new HomePage(getDriver())
                 .clickNavLink(NavBar.LOGIN);
 

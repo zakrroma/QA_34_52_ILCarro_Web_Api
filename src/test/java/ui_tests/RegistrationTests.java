@@ -17,7 +17,6 @@ public class RegistrationTests extends AppManager {
 
     @BeforeMethod
     public void goToSignUpPage() {
-        logger.info("Starting registration test");
         new HomePage(getDriver())
                 .clickNavLink(NavBar.SIGN_UP);
         signUpPage = new SignUpPage(getDriver());

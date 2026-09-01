@@ -24,7 +24,6 @@ public class LoginTests extends AppManager {
 
     @BeforeMethod
     public void goToLoginPage() {
-        logger.info("Starting login test");
         new HomePage(getDriver())
                 .clickNavLink(NavBar.LOGIN);
         loginPage = new LoginPage(getDriver());
