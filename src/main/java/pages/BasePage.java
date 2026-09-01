@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import utils.enums.NavBar;
 
 import java.time.Duration;
@@ -15,8 +13,6 @@ import java.util.List;
 
 public abstract class BasePage {
     static WebDriver driver;
-
-    public Logger logger = LoggerFactory.getLogger(BasePage.class);
 
     public void setDriver(WebDriver wd) {
         driver = wd;
@@ -27,13 +23,12 @@ public abstract class BasePage {
     }
 
     @FindBy(xpath = "//div[@class='error']")
-    List<WebElement> errorList;
+    List<WebElement> errorListLogin;
 
     public boolean isTextPresentsInError(String text) {
-        if (errorList == null || errorList.isEmpty()) return false;
-        for (WebElement e : errorList) {
+        if (errorListLogin == null || errorListLogin.isEmpty()) return false;
+        for (WebElement e : errorListLogin) {
             if (e.getText().contains(text)) {
-                //System.out.println(e.getText());
                 return true;
             }
         }
@@ -61,22 +56,22 @@ public abstract class BasePage {
             case LOGOUT -> {
                 return (T) new HomePage(driver);
             }
-            case LET_THE_CAR_WORK ->  {
+            case LET_THE_CAR_WORK -> {
                 return (T) new LetTheCarWorkPage(driver);
             }
             case TERMS_OF_USE -> {
                 return (T) new TermsOfUsePage(driver);
             }
-            case LOGIN ->  {
+            case LOGIN -> {
                 return (T) new LoginPage(driver);
             }
-            case SIGN_UP ->  {
+            case SIGN_UP -> {
                 return (T) new SignUpPage(driver);
             }
             case DELETE_ACCOUNT -> {
                 return (T) new PopUpMessage(driver);
             }
-            default ->  throw new IllegalArgumentException("Wrong item");
+            default -> throw new IllegalArgumentException("Wrong item");
         }
     }
 
@@ -87,9 +82,8 @@ public abstract class BasePage {
                     .until(ExpectedConditions
                             .textToBePresentInElement(element, text));
         } catch (RuntimeException e) {
-//            e.printStackTrace();
-//            System.out.println("created an exception");
-            logger.error("created an exception",e);
+            //e.printStackTrace();
+            //System.out.println("created an exception");
         }
         return false;
     }

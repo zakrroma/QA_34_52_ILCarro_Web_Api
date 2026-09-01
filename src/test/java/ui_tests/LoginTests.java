@@ -10,7 +10,6 @@ import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopUpMessage;
-import utils.RetryAnalyzer;
 import utils.TestNGListener;
 import utils.enums.NavBar;
 
@@ -78,7 +77,7 @@ public class LoginTests extends AppManager {
         Assert.assertFalse(loginPage.isBtnSubmitEnabled());
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test
     public void loginAllEmptyInteractedFieldsNegativeTest() {
         UserData user = UserData.builder()
                 .username("")

@@ -54,6 +54,10 @@ public class LetTheCarWorkPage extends BasePage {
     @FindBy(css = "button[type='submit']")
     WebElement btnSubmit;
 
+    public boolean validateIsBtnSubmitActive() {
+        return btnSubmit.isEnabled();
+    }
+
     public void clickBtnSubmit() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.querySelector(\"button[type='submit']\")" +
@@ -61,14 +65,24 @@ public class LetTheCarWorkPage extends BasePage {
         btnSubmit.click();
     }
 
+    public void clickBtnSubmitNoJS() {
+        btnSubmit.click();
+    }
+
     public void chooseFuel(Fuel fuel) {
         selectFuel.click();
-        driver.findElement(By.xpath(fuel.getLocator())).click();
+        if (!fuel.name().equals("NULL")) {
+            driver.findElement(By.xpath(fuel.getLocator())).click();
+        }
+        else {
+            pause(1000);
+            selectFuel.click();
+        }
     }
 
     public void downloadImage(String fileName) {
         addPhoto.sendKeys(
-                new File("src/test/resources/"+fileName)
+                new File("src/test/resources/" + fileName)
                         .getAbsolutePath());
     }
 
@@ -78,13 +92,14 @@ public class LetTheCarWorkPage extends BasePage {
         inputModel.sendKeys(car.getModel());
         inputYear.sendKeys(car.getYear());
         chooseFuel(car.getFuel());
-        inputSeats.sendKeys(car.getSeats().toString());
-        //inputSeats.sendKeys(car.getSeats()+"");
+        //inputSeats.sendKeys(car.getSeats().toString());
+        inputSeats.sendKeys(car.getSeats() + "");
         //inputSeats.sendKeys(String.valueOf(car.getSeats()));
         //inputSeats.sendKeys(Integer.toString(car.getSeats()));
         inputCarClass.sendKeys(car.getCarClass());
         inputSerialNumber.sendKeys(car.getSerialNumber());
-        inputPricePerDay.sendKeys(car.getPricePerDay().toString());
+        //inputPricePerDay.sendKeys(car.getPricePerDay().toString());
+        inputPricePerDay.sendKeys(car.getPricePerDay() + "");
         inputAbout.sendKeys(car.getAbout());
     }
 }
