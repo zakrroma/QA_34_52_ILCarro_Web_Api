@@ -71,7 +71,7 @@ public class LetTheCarWorkPage extends BasePage {
 
     public void chooseFuel(Fuel fuel) {
         selectFuel.click();
-        if (!fuel.name().equals("NULL")) {
+        if (fuel != null) {
             driver.findElement(By.xpath(fuel.getLocator())).click();
         }
         else {

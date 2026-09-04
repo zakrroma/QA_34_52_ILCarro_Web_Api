@@ -5,8 +5,7 @@ public enum Fuel {
     PETROL("//form//option[2]"),
     HYBRID("//form//option[3]"),
     ELECTRIC("//form//option[4]"),
-    GAS("//form//option[5]"),
-    NULL("");
+    GAS("//form//option[5]");
 
     private String locator;
 

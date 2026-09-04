@@ -74,7 +74,7 @@ public class LoginTests extends AppManager {
     public void loginAllEmptyNotInteractedFieldsNegativeTest() {
         loginPage.clickBtnSubmit();
 
-        Assert.assertFalse(loginPage.isBtnSubmitEnabled());
+        Assert.assertFalse(loginPage.validateIsBtnSubmitEnabled());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class LoginTests extends AppManager {
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
 
-        softAssert.assertFalse(loginPage.isBtnSubmitEnabled(),
+        softAssert.assertFalse(loginPage.validateIsBtnSubmitEnabled(),
                 "validating if submit button is enabled");
         softAssert.assertTrue(loginPage.isTextPresentsInError("Email is required"),
                 "validating message: Email is required");
@@ -106,7 +106,7 @@ public class LoginTests extends AppManager {
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
 
-        Assert.assertFalse(loginPage.isBtnSubmitEnabled());
+        Assert.assertFalse(loginPage.validateIsBtnSubmitEnabled());
     }
 
     @Test
@@ -119,6 +119,6 @@ public class LoginTests extends AppManager {
         loginPage.fillLoginForm(user);
         loginPage.clickBtnSubmit();
 
-        Assert.assertFalse(loginPage.isBtnSubmitEnabled());
+        Assert.assertFalse(loginPage.validateIsBtnSubmitEnabled());
     }
 }

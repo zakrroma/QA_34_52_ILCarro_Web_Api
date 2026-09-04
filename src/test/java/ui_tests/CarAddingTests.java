@@ -5,6 +5,7 @@ import dto.UserData;
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
@@ -12,10 +13,13 @@ import pages.LetTheCarWorkPage;
 import pages.LoginPage;
 import pages.PopUpMessage;
 import utils.RetryAnalyzer;
+import utils.TestNGListener;
 import utils.enums.NavBar;
 
 import static utils.CarFactory.*;
 import static utils.PropertiesReader.*;
+
+@Listeners(TestNGListener.class)
 
 public class CarAddingTests extends AppManager {
     LetTheCarWorkPage letTheCarWorkPage;
@@ -42,8 +46,6 @@ public class CarAddingTests extends AppManager {
 
     @Test
     public void carAddingPositiveTest() {
-        letTheCarWorkPage = new LetTheCarWorkPage(getDriver());
-
         CarData car = positiveCar();
 
         letTheCarWorkPage.fillLetTheCarWorkForm(car);
@@ -56,8 +58,6 @@ public class CarAddingTests extends AppManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void carAddingAllFieldsEmptyNotInteractedNegativeTest() {
-        letTheCarWorkPage = new LetTheCarWorkPage(getDriver());
-
         letTheCarWorkPage.clickBtnSubmit();
 
         Assert.assertTrue(new PopUpMessage(getDriver())
@@ -74,11 +74,10 @@ public class CarAddingTests extends AppManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void carAddingAllFieldsEmptyInteractedNegativeTest() {
-        letTheCarWorkPage = new LetTheCarWorkPage(getDriver());
-
         CarData car = negativeAllEmptyFieldsCar();
 
         letTheCarWorkPage.fillLetTheCarWorkForm(car);
+        letTheCarWorkPage.downloadImage("car1.png");
         letTheCarWorkPage.clickBtnSubmitNoJS();
 
         softAssert.assertTrue(letTheCarWorkPage.isTextPresentsInError("Wrong address"));
@@ -96,11 +95,10 @@ public class CarAddingTests extends AppManager {
 
     @Test
     public void carAddingEmptyManufactureFieldNegativeTest() {
-        letTheCarWorkPage = new LetTheCarWorkPage(getDriver());
-
         CarData car = negativeEmptyManufactureFieldCar();
 
         letTheCarWorkPage.fillLetTheCarWorkForm(car);
+        letTheCarWorkPage.downloadImage("car1.png");
         letTheCarWorkPage.clickBtnSubmit();
 
         Assert.assertTrue(new PopUpMessage(getDriver())
@@ -110,11 +108,10 @@ public class CarAddingTests extends AppManager {
 
     @Test
     public void carAddingIncorrectYearFieldNegativeTest() {
-        letTheCarWorkPage = new LetTheCarWorkPage(getDriver());
-
         CarData car = negativeIncorrectYearFieldCar();
 
         letTheCarWorkPage.fillLetTheCarWorkForm(car);
+        letTheCarWorkPage.downloadImage("car1.png");
         letTheCarWorkPage.clickBtnSubmit();
 
         softAssert.assertTrue(new PopUpMessage(getDriver())

@@ -31,7 +31,7 @@ public class LoginPage extends BasePage {
         btnSubmit.click();
     }
 
-    public boolean isBtnSubmitEnabled() {
+    public boolean validateIsBtnSubmitEnabled() {
         return btnSubmit.isEnabled();
     }
 }

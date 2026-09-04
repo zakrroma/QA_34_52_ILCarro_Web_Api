@@ -61,4 +61,8 @@ public class SignUpPage extends BasePage {
     public void clickBtnSubmit() {
         btnSubmit.click();
     }
+
+    public boolean validateIsBtnSubmitEnabled() {
+        return btnSubmit.isEnabled();
+    }
 }
