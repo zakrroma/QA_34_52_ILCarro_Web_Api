@@ -30,20 +30,28 @@ public class HomePage extends BasePage {
 
     public void fillSearchForm(String city, LocalDate startDate, LocalDate endDate) {
         inputCity.sendKeys(city);
-        String dates =
-                startDate.getMonthValue()+"/"+
-                startDate.getDayOfMonth()+"/"+
-                startDate.getYear()+" - "+
-                endDate.getMonthValue()+"/"+
-                endDate.getDayOfMonth()+"/"+
-                endDate.getYear();
-        inputDates.sendKeys(dates);
+        if (startDate != null && endDate != null) {
+            String dates =
+                    startDate.getMonthValue() + "/" +
+                            startDate.getDayOfMonth() + "/" +
+                            startDate.getYear() + " - " +
+                            endDate.getMonthValue() + "/" +
+                            endDate.getDayOfMonth() + "/" +
+                            endDate.getYear();
+            inputDates.sendKeys(dates);
+        } else {
+            inputDates.sendKeys("");
+        }
     }
 
     public void clickBtnSubmit() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.querySelector(\"button[type='submit']\")" +
                 ".removeAttribute('disabled')", btnSubmit);
+        btnSubmit.click();
+    }
+
+    public void clickBtnSubmitNoJS() {
         btnSubmit.click();
     }
 }
