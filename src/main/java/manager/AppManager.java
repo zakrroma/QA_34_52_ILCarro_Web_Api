@@ -18,7 +18,7 @@ public class AppManager {
         return driver;
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUp(Method method) {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -27,7 +27,7 @@ public class AppManager {
                 .decorate(driver);
     }
 
-    @AfterMethod(enabled = false)
+    @AfterMethod(alwaysRun = true)//(enabled = false)
     public void tearDown() {
         if (driver != null) {
             driver.quit();

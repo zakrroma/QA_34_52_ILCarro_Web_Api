@@ -22,14 +22,14 @@ public class RegistrationTests extends AppManager {
     SignUpPage signUpPage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToSignUpPage() {
         new HomePage(getDriver())
                 .clickNavLink(NavBar.SIGN_UP);
         signUpPage = new SignUpPage(getDriver());
     }
 
-    @Test
+    @Test(groups = {"smoke","regress","user","positive"})
     public void registrationPositiveTest() {
         UserData user = positiveUser();
 
@@ -40,7 +40,7 @@ public class RegistrationTests extends AppManager {
         Assert.assertTrue(new PopUpMessage(getDriver())
                 .isTextInMessage("You are logged in success"));
     }
-
+/*
     @Test
     public void registrationPositiveTest2() {
         UserData user = positiveUser();
@@ -52,7 +52,7 @@ public class RegistrationTests extends AppManager {
         Assert.assertTrue(new PopUpMessage(getDriver())
                 .isTextInMessage("You are logged in success"));
     }
-
+*/
     @Test(dataProvider = "wrongRegistrationDataProvider",
             dataProviderClass = UserDataProvider.class)
     public void registrationIncorrectPasswordNegativeTest(UserData user) {

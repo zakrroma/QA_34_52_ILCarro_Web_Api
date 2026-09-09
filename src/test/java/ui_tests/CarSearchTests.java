@@ -14,7 +14,7 @@ public class CarSearchTests extends AppManager {
     HomePage homePage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToHomePage() {
         homePage = new HomePage(getDriver());
     }

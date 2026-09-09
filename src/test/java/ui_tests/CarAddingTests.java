@@ -25,7 +25,7 @@ public class CarAddingTests extends AppManager {
     LetTheCarWorkPage letTheCarWorkPage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void loginAndGoToLetTheCarWorkPage() {
         LoginPage loginPage = new HomePage(getDriver())
                 .clickNavLink(NavBar.LOGIN);
@@ -44,7 +44,7 @@ public class CarAddingTests extends AppManager {
                 .clickNavLink(NavBar.LET_THE_CAR_WORK);
     }
 
-    @Test
+    @Test(groups = {"smoke","regress","user","positive","car"})
     public void carAddingPositiveTest() {
         CarData car = positiveCar();
 
@@ -61,7 +61,8 @@ public class CarAddingTests extends AppManager {
         letTheCarWorkPage.clickBtnSubmit();
 
         Assert.assertTrue(new PopUpMessage(getDriver())
-                .isTextInMessage("{\"manufacture\":\"must not be blank\"," +
+                .isTextInMessage(
+                        "{\"manufacture\":\"must not be blank\"," +
                         "\"serialNumber\":\"must not be blank\"," +
                         "\"year\":\"must not be blank\"," +
                         "\"city\":\"must not be blank\"," +

@@ -21,14 +21,14 @@ public class LoginTests extends AppManager {
     LoginPage loginPage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToLoginPage() {
         new HomePage(getDriver())
                 .clickNavLink(NavBar.LOGIN);
         loginPage = new LoginPage(getDriver());
     }
 
-    @Test
+    @Test(groups = {"smoke","regress","user","positive"})
     public void loginPositiveTest() {
         UserData user = UserData.builder()
                 .username(getProperty("base.properties", "email"))
