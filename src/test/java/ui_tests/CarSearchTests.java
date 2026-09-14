@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
-import pages.SearchResultPage;
 
 import java.time.LocalDate;
 
@@ -20,19 +19,7 @@ public class CarSearchTests extends AppManager {
     }
 
     @Test
-    public void searchCarPositiveTest() {
-        String city = "Ashkelon";
-        LocalDate startDate = LocalDate.now().plusDays(2);
-        LocalDate endDate = LocalDate.now().plusDays(8);
-        homePage.fillSearchForm(city, startDate, endDate);
-        homePage.clickBtnSubmit();
-
-        Assert.assertTrue(new SearchResultPage(getDriver())
-                .isTextInSearchResult("No available cars in"));
-    }
-
-    @Test
-    public void searchCarPositiveTest2() {
+    public void searchCarWithInputPositiveTest() {
         String city = "Ashkelon";
         LocalDate startDate = LocalDate.now().plusDays(2);
         LocalDate endDate = LocalDate.now().plusDays(8);
@@ -122,5 +109,18 @@ public class CarSearchTests extends AppManager {
         softAssert.assertTrue(homePage
                 .isTextPresentsInError("You can't book car for less than a day"));
         softAssert.assertAll();
+    }
+
+    @Test
+    public void searchCarWithCalendarSameDatesNegativeTest() {
+        String city = "Ashkelon";
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = LocalDate.now();
+        homePage.interactWithCalendar(city, startDate, endDate);
+
+        homePage.clickBtnSubmitNoJS();
+
+        Assert.assertTrue(homePage
+                .isTextPresentsInError2("You can't book car for less than a day"));
     }
 }

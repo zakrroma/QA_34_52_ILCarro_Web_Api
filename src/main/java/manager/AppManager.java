@@ -27,7 +27,7 @@ public class AppManager {
                 .decorate(driver);
     }
 
-    @AfterMethod(alwaysRun = true)//(enabled = false)
+    @AfterMethod(enabled = false)//(alwaysRun = true)
     public void tearDown() {
         if (driver != null) {
             driver.quit();
