@@ -1,4 +1,10 @@
 ./gradlew clean - clean reports
 ./gradlew clean test - clean reports and execute all tests
-./gradlew clean qa - clean reports and execute task 'qa' from testng.xml
+./gradlew clean qa - clean reports and execute task from testng.xml
 ./gradlew clean scope - clean reports and execute task 'scope' from scope.xml
+./gradlew clean scope -Pbrowser=firefox - clean reports and execute task 'scope'
+from scope.xml with firefox browser
+./gradlew clean qa_suites -Dsuite=registration_login - clean reports and execute
+task from testng.xml
+./gradlew clean groups -Dgroups=smoke - clean reports and execute all tasks from
+"smoke" group

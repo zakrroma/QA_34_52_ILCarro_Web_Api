@@ -22,25 +22,12 @@ public abstract class BasePage {
         return element.isDisplayed();
     }
 
-    @FindBy(xpath = "//div[@class='error']")
+    @FindBy(xpath = "//div[@class='error' or @class='ng-star-inserted']")
     List<WebElement> errorList;
-
-    @FindBy(xpath = "//div[@class='error ng-star-inserted']")
-    List<WebElement> errorList2;
 
     public boolean isTextPresentsInError(String text) {
         if (errorList == null || errorList.isEmpty()) return false;
         for (WebElement e : errorList) {
-            if (e.getText().contains(text)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isTextPresentsInError2(String text) {
-        if (errorList2 == null || errorList2.isEmpty()) return false;
-        for (WebElement e : errorList2) {
             if (e.getText().contains(text)) {
                 return true;
             }

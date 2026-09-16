@@ -87,4 +87,8 @@ public class HomePage extends BasePage {
     public void clickBtnSubmitNoJS() {
         btnSubmit.click();
     }
+
+    public void pressEscape() {
+        inputDates.sendKeys(Keys.ESCAPE);
+    }
 }

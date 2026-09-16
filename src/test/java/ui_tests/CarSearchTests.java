@@ -18,7 +18,7 @@ public class CarSearchTests extends AppManager {
         homePage = new HomePage(getDriver());
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void searchCarWithInputPositiveTest() {
         String city = "Ashkelon";
         LocalDate startDate = LocalDate.now().plusDays(2);
@@ -121,6 +121,21 @@ public class CarSearchTests extends AppManager {
         homePage.clickBtnSubmitNoJS();
 
         Assert.assertTrue(homePage
-                .isTextPresentsInError2("You can't book car for less than a day"));
+                .isTextPresentsInError("You can't book car for less than a day"));
+    }
+
+    @Test
+    public void searchCarWithCalendarPlusOneYearNegativeTest() {
+        String city = "Ashkelon";
+        LocalDate startDate = LocalDate.now()
+                .plusYears(1).plusDays(2);
+        LocalDate endDate = LocalDate.now()
+                .plusYears(1).plusDays(8);
+        homePage.interactWithCalendar(city, startDate, endDate);
+
+        homePage.pressEscape();
+
+        Assert.assertTrue(homePage
+                .isTextPresentsInError("Dates are required"));
     }
 }
